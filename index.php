@@ -37,6 +37,7 @@ $sistem = new sistem;
 
 </head>
 <body>
+    <!-- header -->
     <header>
         <div class="row border-secondary border-bottom bg-warning">
             <div class="col-md-12">
@@ -50,9 +51,10 @@ $sistem = new sistem;
                 </div>
             </div>
         </div>
+    <!-- header kategori -->
         <?php $b = $sistem->sorgum($db, "SELECT * FROM kategori",1); ?>
-        <div class="col-md-12 d-flex flex-wrap align-items-center justify-content-center justify-content-md-start bg-warning">
-            <ul class="nav col-12 col-md-auto me-md-auto mb-2 justify-content-center mb-md-0 bg-warning">
+        <div class="col-md-12 d-flex flex-wrap align-items-center justify-content-center justify-content-md-start bg-warning bg-opacity-50" id="kitapplar">
+            <ul class="nav col-12 col-md-auto me-md-auto mb-2 justify-content-center">
                 <?php while($kategori=$b->FETCH_ASSOC()): 
                 echo 
                 '<li><a href="kategorisayfa.php?id='.$kategori["id"].'" class="nav-link px-2 text-danger">'.$kategori["ad"].'</a></li>';
@@ -67,107 +69,59 @@ $sistem = new sistem;
             </div>
         </div>
     </header>
-
+    <!-- header -->        
+        
+    <!-- Slider -->
     <section>
         <div class="col-md-12 text-center mt-2">
             <img src="Resimler/Slider/resim.jpg" alt="">
         </div>
-    </section>
+    </section>    
+    <!-- Slider -->
 
+    <!-- Öne Çıkan Kitaplar -->
+    <?php $coksatan = $sistem->sorgum($db,"SELECT * FROM kitaplar WHERE katid=1 LIMIT 5",1); ?>
     <div class="container-cards">
         <h3 style="margin: 10px;">Öne Çıkan Kitaplar</h3>
-        <div class="row mx-auto">
-            <div class="col-md-2 m-3 ms-5">
-                <div class="card border-dark">
-                    <img src="Resimler/Kitaplar/SekerPortakali.jfif" class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Şeker Portakalı</h5>
-                      <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, molestias.</p>
-                      <a href="kitapincele.php" class="btn btn-primary">Kitabı İncele</a>
+        <div class="row mx-auto"><?php
+            while($onecikan = $coksatan->FETCH_ASSOC()):
+                echo '<div class="col-md-2 m-3 ms-3">
+                    <div class="card border-dark">
+                        <img src="'.$onecikan["resim"].'" class="card-img-top" alt="">
+                        <div class="card-body text-center">
+                          <h5 class="card-title">'.$onecikan["ad"].'</h5>
+                          <p class="card-text">'.$onecikan["fiyat"].' TL</p>
+                          <a href="kitapincele.php?id='.$onecikan["id"].'" class="btn btn-primary" id="1">Kitabı İncele</a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-2 m-3">
-                <div class="card border-dark">
-                    <img src="Resimler/Kitaplar/simyaci.jpg" class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Simyacı</h5>
-                      <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, molestias.</p>
-                      <a href="#" class="btn btn-primary">Kitabı İncele</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 m-3">
-                <div class="card border-dark">
-                    <img src="Resimler/Kitaplar/kirke.jfif" class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Ben, Kirke</h5>
-                      <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, molestias.</p>
-                      <a href="#" class="btn btn-primary">Kitabı İncele</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 m-3">
-                <div class="card border-dark">
-                    <img src="Resimler/Kitaplar/VarMısın.jfif" class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Var Mısın?</h5>
-                      <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, molestias.</p>
-                      <a href="#" class="btn btn-primary">Kitabı İncele</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 m-3">
-                <div class="card border-dark">
-                    <img src="Resimler/Kitaplar/hayvanCiftligi.jpg" class="card-img-top" alt="">
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Hayvan Çiftliği</h5>
-                      <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, molestias.</p>
-                      <a href="#" class="btn btn-primary">Kitabı İncele</a>
-                    </div>
-                </div>
-            </div>
+                 </div>';
+            endwhile;
+                ?>
         </div>
     </div>
+    <!-- Öne Çıkan Kitaplar -->
 
-    <div class="container-images">
+    <!-- Ayın Yazarları -->
+    <?php $yaz = $sistem->sorgum($db, "SELECT * FROM yazarlar WHERE id LIMIT 5",1); ?>  
+    <div class="container-cards">
         <h3 style="margin: 10px;">Ayın Yazarları</h3>
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-around border border-dark bg-secondary">
-                <div class="card mb-2 mt-2">
-                    <img src="Resimler/Yazarlar/Jose.jpg" class="card-img-top rounded-circle" style="width: 150px; height: 150px; padding: 5px;">
-                    <div class="card-body">
-                        <p class="card-text text-center">Jose Vasconcelos</p>
+        <div class="row mx-auto"><?php
+            while($yazar = $yaz->FETCH_ASSOC()):
+                echo '<div class="col-md-2 m-3 ms-3">
+                    <div class="card border-dark">
+                        <img style="width: 150px; height: 150px;" src="'.$yazar["resim"].'" class="card-img-top rounded-circle ms-5 mt-2">
+                        <div class="card-body text-center">
+                          <a href="yazarsayfa.php?id='.$yazar["id"].'" class="btn btn-primary">'.$yazar["yazarad"].'</a>
+                        </div>
                     </div>
-                </div>
-                <div class="card mb-2 mt-2">
-                    <img src="Resimler/Yazarlar/Paulo.jfif" class="card-img-top rounded-circle" style="width: 150px; height: 150px; padding: 5px;">
-                    <div class="card-body">
-                        <p class="card-text text-center">Paulo Coelho</p>
-                    </div>
-                </div>
-                <div class="card mb-2 mt-2">
-                    <img src="Resimler/Yazarlar/Doğan.jpg" class="card-img-top rounded-circle" style="width: 150px; height: 150px; padding: 5px;">
-                    <div class="card-body">
-                        <p class="card-text text-center">Doğan Cüceloğlu</p>
-                    </div>
-                </div>
-                <div class="card mb-2 mt-2">
-                    <img src="Resimler/Yazarlar/Madeline.jpg" class="card-img-top rounded-circle" style="width: 150px; height: 150px; padding: 5px;">
-                    <div class="card-body">
-                        <p class="card-text text-center">Madeline Miller</p>
-                    </div>
-                </div>
-                <div class="card mb-2 mt-2">
-                    <img src="Resimler/Yazarlar/George.jfif" class="card-img-top rounded-circle" style="width: 150px; height: 150px; padding: 5px;">
-                    <div class="card-body">
-                        <p class="card-text text-center">George Orwell</p>
-                    </div>
-                </div>
-            </div>
+                 </div>';
+            endwhile;
+                ?>
         </div>
     </div>
+    <!-- Ayın Yazarları -->
 
+    <!-- Top-Footer -->
     <div class="container">
         <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
             <div class="col-md-4">

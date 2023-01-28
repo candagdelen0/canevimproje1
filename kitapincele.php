@@ -75,10 +75,12 @@ $kitabim = new sistem;
 	</header>
 
 	<?php
-		@$kitapid=htmlspecialchars($_GET["id"]);
-    	$son=$kitabim->kitapincele($db,$kitapid);
+		@$id=htmlspecialchars($_GET["id"]);
+    	$son=$kitabim->kitapincele($db,$id);
     	$dizi = $son->FETCH_ASSOC();
 
+    	$son2=$kitabim->yazarcek($db,$id);
+    	$dizi2 = $son2->FETCH_ASSOC();
 	?>
 	<div class="container">
 		<div class="col-md-12 bg-warning bg-opacity-50">
@@ -91,10 +93,17 @@ $kitabim = new sistem;
 				<div class="col-md-8">
 					<div class="m-2 card bg-warning bg-opacity-75">
 						<h3 class="text-center p-2"><?php echo $dizi["ad"]; ?></h3>
-                        <a href="#" class="text-start text-dark m-2">
-								<strong>Yazar Adı</strong>
-							</a>
-		
+						
+						<?php 
+
+							if ($dizi["yazarid"] == $dizi2["id"]):
+							echo '<a href="#" class="text-start text-dark m-2">
+								<strong> '.$dizi2["yazarad"].' </strong>
+							</a>';
+							else:
+							echo "Hata var!";
+							endif;
+						?>
 						<div class="m-1">
 							<?php echo $dizi["aciklama"]; ?>
 						</div>
@@ -169,4 +178,3 @@ $kitabim = new sistem;
     </footer>
 </body>
 </html>
-

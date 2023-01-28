@@ -99,10 +99,10 @@ $kategorim = new sistem;
     </div>
     
     <?php 
-    @$id=htmlspecialchars($_GET["id"]); 
-    $son=$kategorim->kategorigetir($db,$id);
+    @$katid=htmlspecialchars($_GET["id"]); // kategori id
+    $son=$kategorim->kategorigetir($db,$katid);
     $dizi = $son->FETCH_ASSOC();
-    @$katid=htmlspecialchars($_GET["katid"]);  
+    @$katid=htmlspecialchars($_GET["katid"]);  // kitaplar tablosundaki kategori id
     $son=$kategorim->kitapgetir($db,$katid);
 
     echo '<div class="col-md-12">
@@ -114,9 +114,9 @@ $kategorim = new sistem;
             <img src="'.$dizi2["resim"].'" style="width:100%">
             <h1>'.$dizi2["ad"].'</h1>
             <p class="price">'.$dizi2["fiyat"].' <b> TL</b></p>
-            <p><a class="btn btn-primary" href="kitapincele.php?id=#" role="button">Kitabı İncele</a></p>
+            
+            <p><a class="btn btn-primary" href="kitapincele.php?id='.$dizi2["id"].'" role="button">Kitabı İncele</a></p>
         </div>';
-
         endif;
     endwhile;
     echo '</div>';
