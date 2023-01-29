@@ -274,7 +274,7 @@
 		    	<input type="email" placeholder="Email" />
 		    	<input type="password" placeholder="Password" />
 		    	<a href="#">Forgot your password?</a>
-		    	<button>Sign In</button>
+		    	<button><a href="uyepanel.php">Sign In</a></button>  <!-- giriş kontrol eklenecek -->
 		    </form>
 	    </div>
 	    <div class="overlay-container">
