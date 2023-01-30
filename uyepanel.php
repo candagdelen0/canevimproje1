@@ -76,11 +76,11 @@
         }
         .tabcontent {
           float: left;
-          padding: 0px 12px;
+          padding: 3px 12px;
           border: 1px solid #ccc;
           width: 70%;
           border-left: none;
-          height: 400px;
+          height: 415px;
         }
         .buttonup {
             padding: 15px 25px;
@@ -109,8 +109,8 @@
                 <h3 class="p-2 m-3"><i class="fa-solid fa-user pe-3"></i>User Name</h3>
                 <div class="tab">
                     <button class="tablinks" onclick="openCity(event, 'Bilgiler')" id="defaultOpen">Kullanıcı Bilgileri</button>
-                    <button class="tablinks" onclick="openCity(event, 'Yorum')">Adreslerim</button>
-                    <button class="tablinks" onclick="openCity(event, 'Yorum')">Şifre Değiştirme</button>
+                    <button class="tablinks" onclick="openCity(event, 'Adres')">Adreslerim</button>
+                    <button class="tablinks" onclick="openCity(event, 'Sifre')">Şifre Değiştirme</button>
                     <button class="tablinks" onclick="openCity(event, 'Sipariş')">Siparişlerim</button>
                     <button class="tablinks" onclick="openCity(event, 'Favori')">Favorilerim</button>
                     <button class="tablinks" onclick="openCity(event, 'Yorum')">Yorumlarım</button>
@@ -148,17 +148,74 @@
                     </form>
 
                 </div>
+                <div id="Adres" class="tabcontent">
+                    <h3>Adreslerim</h3>
+                    <div class="row mx-auto">
+                      <div class="col-md-3 border border-secondary rounded m-3">
+                        <p class="text-center m-2"><b>Ev Adresi</b></p> 
+                        <p>Kireçburnu Mahallesi Direkli Sokak No:24</p>
+                        <p>Sarıyer/İstanbul</p>
+                        <button type="button" class="btn btn-light mb-2"><em>Düzenle</em></button>
+                      </div>
+                      <div class="col-md-3 border border-secondary rounded m-3">
+                        <p class="text-center m-2"><b>İş Adresi</b></p> 
+                        <p>Yeşilpınar Mahallesi Şehit Metin Kaya Sokak No:11/1</p>
+                        <p>Eyüpsultan/İstanbul</p> 
+                        <button type="button" class="btn btn-light mb-2"><em>Düzenle</em></button>
+                      </div>
+                      <div class="col-md-3 border border-secondary rounded m-3">
+                        <p class="text-center m-2"><b>Yazlık Adresi</b></p> 
+                        <p>Anadolu Kavağı Mahallesi Fener yolu No:3</p>
+                        <p>Beykoz/İstanbul</p> 
+                        <button type="button" class="btn btn-light mb-2"><em>Düzenle</em></button>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-end me-5 mt-3">
+                      <button type="button" class="btn btn-outline-info">Yeni Adres Ekle</button>
+                    </div>
+                </div>
+                <div id="Sifre" class="tabcontent">
+                  <h3 class="ms-5 mt-3">Şifre Değiştir</h3>
+                  <form action="">
+                    <div class="text-center mt-3">
+                      <p class="m-2">Mevcut Şifre:</p>
+                      <input type="text">
+                      <p class="m-2">Yeni Şifre:</p>
+                      <input type="text">
+                      <p class="m-2">Yeni Şifre Onay:</p>
+                      <input type="text">
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                      <button class="btn btn-primary mt-5" type="button">Onayla</button>
+                    </div>
+                  </form>
+                </div>
                 <div id="Sipariş" class="tabcontent">
-                    <h3>Siparişlerim</h3>
-                    <p>Paris is the capital of France.</p> 
+                  <h3>Siparişlerim</h3>
+                  <div class="mt-3">
+                    <div class="bg-secondary bg-opacity-75">Sipariş 1</div>
+                    <div class="bg-secondary bg-opacity-25">içerik</div>
+                  </div>
+                  <div class="mt-3">
+                    <div class="bg-secondary bg-opacity-75">Sipariş 2</div>
+                    <div class="bg-secondary bg-opacity-25">içerik</div>
+                  </div>
+                  <div class="mt-3">
+                    <div class="bg-secondary bg-opacity-75">Sipariş 3</div>
+                    <div class="bg-secondary bg-opacity-25">içerik</div>
+                  </div>
                 </div>
                 <div id="Favori" class="tabcontent">
                   <h3>Favorilerim</h3>
-                  <p>Tokyo is the capital of Japan.</p>
+                  <div class="bg-warning">
+                    içerik
+                  </div>
                 </div>
                 <div id="Yorum" class="tabcontent">
                   <h3>Yorumlarım</h3>
-                  <p>Amsterdam is the capital of Netherlands.</p>
+                  <div class="bg-secondary bg-opacity-50">
+                    Yorumlar
+                  </div>
                 </div>
             </div>
 
