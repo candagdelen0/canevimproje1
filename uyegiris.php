@@ -227,6 +227,24 @@
             color: #3c97bf;
             text-decoration: none;
         }
+		.alert {
+  			padding: 20px;
+  			background-color: #f44336;
+  			color: white;
+		}
+		.closebtn {
+		  margin-left: 15px;
+		  color: white;
+		  font-weight: bold;
+		  float: right;
+		  font-size: 22px;
+		  line-height: 20px;
+		  cursor: pointer;
+		  transition: 0.3s;
+		}
+		.closebtn:hover {
+		  color: black;
+		}
     </style>
 
     <script>
@@ -271,10 +289,10 @@
 		    		<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 		    	</div>
 		    	<span>or use your account</span>
-		    	<input type="email" placeholder="Email" />
-		    	<input type="password" placeholder="Password" />
+		    	<input type="email" name="email" placeholder="Email" />
+		    	<input type="password" name="password" placeholder="Password" />
 		    	<a href="#">Forgot your password?</a>
-		    	<button><a href="uyepanel.php">Sign In</a></button>  <!-- giriş kontrol eklenecek -->
+		    	<button name="login">Sign In</button>  
 		    </form>
 	    </div>
 	    <div class="overlay-container">
@@ -282,7 +300,7 @@
 	    		<div class="overlay-panel overlay-left">
 	    			<h1>Welcome Back!</h1>
 	    			<p>To keep connected with us please login with your personal info</p>
-	    			<button class="ghost" id="signIn">Sign In</button>
+	    			<button class="ghost" name="login" id="signIn">Sign In</button>
 	    		</div>
 	    		<div class="overlay-panel overlay-right">
 	    			<h1>Hello, Friend!</h1>
@@ -291,7 +309,43 @@
 	    		</div>
 	    	</div>
 	    </div>
-    </div>
+    </div>  <!-- session işlemleri eklenecek -->
+	<?php
+		if(isset($_SESSION['user'])!="") {
+			header("Location: index.php");
+			exit;
+		}
+		$error = false;
+		if (isset($_POST["login"])) {
+			$mail = trim($_POST["email"]);
+			$mail = strip_tags($mail);
+			$mail = htmlspecialchars($mail);
+
+			$psw = trim($_POST["password"]);
+			$psw = strip_tags($psw);
+			$psw = htmlspecialchars($psw);
+
+			if ($mail != "" || $psw !="") {
+				$password = hash('sha256', $psw);
+
+				$son = mysqli_query($db, "SELECT * FROM users WHERE userMail= '$mail' ");
+				$dizi = mysqli_fetch_array($son);
+				$say = mysqli_num_rows($son);
+
+				if ($say == 1 && $dizi["userPassword"]==$password) {
+					//$_SESSION['user'] = $dizi["userid"];
+					header("Location: uyepanel.php");
+				}
+			} else { 
+				?>
+				<div class="alert">
+				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+				<strong>Hata Var</strong> Bilgiler Boş Bırakılamaz.
+			  </div>
+		  <?php
+			}
+		}
+		?>
 </body>
 </html>
 
